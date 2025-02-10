@@ -117,12 +117,17 @@ const toMarkdown = (summary, options) => {
 | ${tests} | ${skipped} :zzz: | ${failures} :x: | ${errors} :fire: | ${displayTime} :stopwatch: |
 `;
 
+  console.log('Summary:', JSON.stringify(summary.notSuccessTestInfo));
+  
   // Combine and sort all non-success tests
   const allNonSuccessTests = [
     ...summary.notSuccessTestInfo.failures.map(f => ({ ...f, type: ':x: Failure' })),
     ...summary.notSuccessTestInfo.errors.map(e => ({ ...e, type: ':fire: Error' })),
     ...summary.notSuccessTestInfo.skipped.map(s => ({ ...s, type: ':zzz: Skipped' }))
   ];
+
+  // Print non-success tests
+  console.log('Non-Success Tests:', JSON.stringify(allNonSuccessTests));
 
   // Detailed non-success tests section
   let nonSuccessDetails = '';
